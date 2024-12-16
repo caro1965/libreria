@@ -1,0 +1,71 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.ArrayList;
+
+class Producto {
+    String nombre;
+    double precio;
+
+    Producto(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+}
+
+class Cliente {
+    String nombre;
+    ArrayList<Producto> productos;
+    Date fechaCompra;
+
+    Cliente(String nombre, ArrayList<Producto> productos, Date fechaCompra) {
+        this.nombre = nombre;
+        this.productos = productos;
+        this.fechaCompra = fechaCompra;
+    }
+
+    void imprimirTicket() {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        System.out.println("Cliente: " + nombre);
+        System.out.println("Fecha de compra: " + formatoFecha.format(fechaCompra));
+        System.out.println("Productos:");
+        double total = 0;
+        for (Producto producto : productos) {
+            System.out.println("- " + producto.nombre + ": $" + producto.precio);
+            total += producto.precio;
+        }
+        System.out.println("Total: $" + total);
+        System.out.println("-------------------------");
+    }
+}
+
+public class Facturacion {
+    public static void main(String[] args) {
+        ArrayList<Producto> productos1 = new ArrayList<>();
+        productos1.add(new Producto("Cuaderno", 50));
+        productos1.add(new Producto("Lapicera", 20));
+        productos1.add(new Producto("Goma de borrar", 15));
+        productos1.add(new Producto("Carpeta", 80));
+        productos1.add(new Producto("Resaltador", 30));
+        productos1.add(new Producto("Regla", 25));
+        productos1.add(new Producto("Mochila", 200));
+        productos1.add(new Producto("Calculadora", 150));
+        productos1.add(new Producto("Agenda", 70));
+        productos1.add(new Producto("Tijeras", 35));
+
+        ArrayList<Producto> productos2 = new ArrayList<>(productos1);
+        ArrayList<Producto> productos3 = new ArrayList<>(productos1);
+        ArrayList<Producto> productos4 = new ArrayList<>(productos1);
+
+        Date fechaCompra = new Date();
+
+        Cliente cliente1 = new Cliente("Juan", productos1, fechaCompra);
+        Cliente cliente2 = new Cliente("María", productos2, fechaCompra);
+        Cliente cliente3 = new Cliente("Pedro", productos3, fechaCompra);
+        Cliente cliente4 = new Cliente("Lucía", productos4, fechaCompra);
+
+        cliente1.imprimirTicket();
+        cliente2.imprimirTicket();
+        cliente3.imprimirTicket();
+        cliente4.imprimirTicket();
+    }
+}
